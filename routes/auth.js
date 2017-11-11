@@ -4,10 +4,10 @@ var router = express.Router();
 var userController = require('../controller/auth.controller');
 
 /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-//   next();
-// });
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+  next();
+});
 
 
 router.post('/register', userController.register);
