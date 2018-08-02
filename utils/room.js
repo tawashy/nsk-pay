@@ -1,46 +1,88 @@
-function Room(name, id, owner) {
-    this.name = name;
+function Room(id, owner) {
     this.id = id;
-    this.owner = owner;
-    this.people = [];
-    this.peopleLimit = 2;
-    this.status = "available";
-    this.private = false;
-};
+    this.POS = owner;
+    this.customer = null;
+    this.order = 0.00;
+    this.locked = true;
+}
 
-Room.prototype.addPerson = function(personID) {
-    if (this.status === "available" && this.people.length <= this.peopleLimit)
-        this.people.push(personID);
-
-};
-
-Room.prototype.removePerson = function(person) {
-    for(var i = 0; i < this.people.length; i++)
-        if(this.people[i].id === person.id){
-            this.people.remove(i);
-            break;
-        }
-
-
-};
-
-Room.prototype.getPerson = function(personID) {
-    var person = null;
-    for(var i = 0; i < this.people.length; i++) {
-        if(this.people[i].id === personID) {
-            person = this.people[i];
-            break;
-        }
+/*
+ * Checks if room is not locked  and customer is empty
+ * and adds customer to the room
+ */
+Room.prototype.joinRoom = function (customerId) {
+    if (!this.locked && !this.customer) {
+        console.log('customer has joined the room');
+        this.customer = customerId;
+        this.locked = true
+    } else {
+        console.log("room is private....")
     }
-    return person;
 };
 
-Room.prototype.isAvailable = function() {
-    return this.available === "available";
+/*
+ * Checks if customerId is the same as the one in the room
+ * and remove the customer.
+ *
+ * checks if POS id is the same as id and then re sets the room
+ */
+Room.prototype.leaveRoom = function (id) {
+    if (this.customer === id) {
+        this.customer = null;
+        this.locked = false;
+    }
+
+    if (this.POS === id){
+        this.locked = true;
+        this.customer = null;
+        this.order = 0.00;
+        this.POS = null;
+
+    }
 };
 
-Room.prototype.isPrivate = function() {
-    return this.private;
+/*
+ * Check if customer is not empty and returns it id
+ */
+Room.prototype.getCustomerId = function () {
+    if (this.customer && !this.locked)
+        return this.customer
 };
+
+/*
+ * Check if the id is the same as the POS
+ * it locks the room
+ */
+Room.prototype.lockRoom = function (id) {
+    if (this.POS === id)
+        this.locked = true
+};
+
+/*
+ * Check if the id is the same as the POS
+ * it unlocks the room
+ */
+Room.prototype.unlockRoom = function (id) {
+    if (this.POS === id)
+        this.locked = false
+};
+
+/*
+ * it checks if the customer id the same as id
+ * it return the order
+ */
+Room.prototype.getOrder = function (id) {
+    console.log("User ID Requesting: ", id);
+    console.log("User ID in Room: ", this.customer);
+    if (this.customer === id)
+        return this.order
+};
+
+Room.prototype.updateOrder = function (id, amount) {
+    if (this.POS === id){
+        this.order = amount;
+    }
+};
+
 
 module.exports = Room;
