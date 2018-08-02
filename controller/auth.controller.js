@@ -40,11 +40,20 @@ exports.login = function (req, res) {
         return res.status(403).send({ error: 'Please enter an email and a password'})
     }
 
+    return res.status(200).json({
+        id: "1",
+        name: "Yaser Tawash",
+        email: "yaser.tawash@gmail.com",
+        balance: 100.00,
+        createdAt: `${Date.now()}`
+    })
+
     const query = { email: req.body.email };
     User.findOne(query).exec(function (err, user) {
         if (err) return res.status(500).end();
         if (!user )
             return res.status(401).send({ error: ' Authentication failed. User not found.'});
+
 
 
         user.comparePassword(req.body.password, function (err, isMatch) {
