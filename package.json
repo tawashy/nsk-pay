@@ -1,12 +1,13 @@
 {
-  "name": "payco",
-  "version": "0.0.0",
+  "name": "nsk Pay",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "binary-extensions": "^1.11.0",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
