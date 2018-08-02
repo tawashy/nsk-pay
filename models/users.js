@@ -1,24 +1,30 @@
-/* User Model */
-
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt-nodejs');
 
 // the User schema's structure
-var schema = new Schema({
+var User = new Schema({
     name:       { type: String, required: true },
     email:      { type: String, lowercase: true, required: true },
     password:   { type: String, required: true },
     balance:    { type: Number, default: 0.00 },
     ACL:        { type: String, enum: ['POS', 'Customer'], default: 'Customer'},
-    createdAt: { type: Date, default: Date.now()}
+    // Major:      { type: Number, required: true, min: 1, max: 65535 },
+    // Minor:      { type: Number, required: true, min: 1, max: 65535 },
+    createdAt:  { type: Date, default: Date.now() }
 });
+
+
+// Force indexing to make sure major, minor and ACL, as a set,
+// is a unique combination before added to the database
+// User.index({ACL: 1, Major: 1, Minor: 1}, { unique: true});
+
 
 // An empty function
 var noop = function () {};
 
 // before save function
-schema.pre('save', function (done) {
+User.pre('save', function (done) {
     var user = this;
 
     // Check if the user have not modified his password,
@@ -40,7 +46,7 @@ schema.pre('save', function (done) {
 });
 
 // compare password function
-schema.methods.comparePassword = function (guess, done) {
+User.methods.comparePassword = function (guess, done) {
     bcrypt.compare(guess, this.password, function (err, isMatch) {
         done(err, isMatch);
     });
@@ -48,4 +54,4 @@ schema.methods.comparePassword = function (guess, done) {
 
 
 // creating the user's model and exporting it
-module.exports = users = mongoose.model('User', schema );
+module.exports = users = mongoose.model('User', User );

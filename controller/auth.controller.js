@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 
 
-var User = require('../models/user');
+var User = require('../models/users');
 
 exports.register = function (req, res) {
     if (!req.body.name){
