@@ -1,7 +1,3 @@
-/**
- * Created by tawashy on 10/28/17.
- */
-
 function Room(name, id, owner) {
     this.name = name;
     this.id = id;

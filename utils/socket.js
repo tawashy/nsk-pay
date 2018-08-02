@@ -1,7 +1,3 @@
-/**
- * Created by tawashy on 10/1/17.
- */
-
 module.exports = function (server) {
 
     var socket = require('socket.io');

@@ -1,6 +1,3 @@
-/**
- * Created by tawashy on 11/3/17.
- */
 var jwt = require('jsonwebtoken');
 
 

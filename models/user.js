@@ -1,6 +1,3 @@
-/**
- * Created by tawashy on 9/21/17.
- */
 /* User Model */
 
 var mongoose = require('mongoose'),

@@ -1,6 +1,3 @@
-/**
- * Created by tawashy on 9/23/17.
- */
 /* Transaction Model */
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;

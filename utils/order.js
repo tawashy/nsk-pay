@@ -1,7 +1,3 @@
-/**
- * Created by tawashy on 10/29/17.
- */
-
 var Item = require('./item')
 
 function Order(id, POS, date) {

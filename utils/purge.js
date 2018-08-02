@@ -1,7 +1,3 @@
-/**
- * Created by tawashy on 10/28/17.
- */
-
 const _ = require('underscore');
 
 var people = {};

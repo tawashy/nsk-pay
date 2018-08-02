@@ -1,6 +1,3 @@
-/**
- * Created by tawashy on 9/23/17.
- */
 /* inStore Model */
 
 var mongoose = require('mongoose'),
